@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 export default function ColorSelector(props) {
   let borderRad = "70%";
-  let styleVar = { borderRadius: borderRad, height: "28px", width: "15px" };
-  const selectedStyle = "2px solid black";
-  const unSelectedStyle = "2px solid transparent";
+  let styleVar = { borderRadius: borderRad, height: "32px", width: "15px" };
+  const selectedStyle = "5px solid black";
+  const unSelectedStyle = "5px solid transparent";
   const btn2Color = "#B71C1C";
   const btn1Color = "#004D40";
   const btn3Color = "#01579B";

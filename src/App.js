@@ -2,7 +2,9 @@ import "./App.css";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
+import About from "./components/About";
 import { useState, useEffect } from "react";
+//import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const btn2Color = "#B71C1C";
@@ -53,23 +55,33 @@ function App() {
 
   return (
     <>
-      <Navbar
-        title="Text Utils"
-        aboutText="About TextUtils"
-        mode={mode}
-        toggleMode={toggleMode}
-        toggleBgColor={setBgColor}
-        isDisabled={isDisabled}
-      />
-      <Alert alert="Hello there" />
-      <div className="container my-3">
-        <TextForm
+      {/* <Router> */}
+        <Navbar
+          title="Text Utils"
+          aboutText="About"
           mode={mode}
-          heading="Enter the text to analyze below"
-          btnColor={btnColor}
+          toggleMode={toggleMode}
+          toggleBgColor={setBgColor}
+          isDisabled={isDisabled}
         />
-        {/* <About /> */}
-      </div>
+        <Alert alert="Hello there" />
+        <div className="container my-3">
+          {/* <Routes>
+            <Route exact path="/about" element={<About />}></Route>
+            <Route
+              exact
+              path="/"
+              element={ */}
+                <TextForm
+                  mode={mode}
+                  heading="Enter the text to analyze below"
+                  btnColor={btnColor}
+                />
+              {/* }
+            ></Route>
+          </Routes> */}
+        </div>
+      {/* </Router> */}
     </>
   );
 }
