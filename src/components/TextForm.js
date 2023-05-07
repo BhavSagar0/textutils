@@ -8,9 +8,11 @@ export default function TextForm(props) {
         console.log("Handled up click")
         setText(text.toUpperCase());
     }
-
+    let btnStyle = {
+        backgroundColor : props.btnColor,
+        borderColor : props.btnColor
+    }
     const handleOnChange = async (event) => {
-        debugger;
         let localPush = push;
         strVal = event.target.value;
         let lastChar = strVal.charAt(strVal.length-1);
@@ -66,21 +68,21 @@ export default function TextForm(props) {
     //setText("New fooking text");
   return (
     <>
-    <div>
+    <div className='container' style={{ color : props.mode==='light'?'black':'white' }} >
         <h1>{props.heading}</h1>
         <div className="mb-3">
-            <textarea value={text} className="form-control" onChange={handleOnChange} id="myBox" rows="8"></textarea>
+            <textarea value={text} className="form-control" onChange={handleOnChange} style={{ backgroundColor : props.mode==='light'?'white':'grey', color : props.mode==='light'?'black':'white'  }} id="myBox" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleLowClick}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleUndoClick}>Undo</button>
+        <button className="btn btn-primary mx-2" style={btnStyle} onClick={handleUpClick}>Convert to Uppercase</button>
+        <button className="btn btn-primary mx-2" style={btnStyle} onClick={handleLowClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-2" style={btnStyle} onClick={handleUndoClick}>Undo</button>
     </div>
-    <div className="container my-2">
+    <div className="container my-2" style={{ color : props.mode==='light'?'black':'white' }}>
         <h2>Your text summary</h2>
-        <p>{text.split(" ").length} Words, {text.length} characters</p>
+        <p>{text.length === 0 ? 0 : text.split(" ").length} Words, {text.length} characters</p>
         <p>{0.008 * text.split(" ").length} minutes</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length>0?text:'Enter something to preview it here'}</p>
     </div>
     </>
     
