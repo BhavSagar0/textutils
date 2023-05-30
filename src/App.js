@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
 import { useState, useEffect } from "react";
-//import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const btn2Color = "#B71C1C";
@@ -14,6 +14,19 @@ function App() {
   const [bgColor, setBgColor] = useState(btn1Color);
   const [isDisabled, setIsDisabled] = useState(false);
   const [btnColor, setBtnColor] = useState("blue");
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      message : message,
+      type : type
+    });
+
+    setTimeout(() => {
+      setAlert(null);
+  }, 1500);
+  }
+
   useEffect(() => {
     if (mode === "dark") {
       toggleMode("dark");
@@ -40,11 +53,13 @@ function App() {
         setIsDisabled(true);
         setMode("dark");
         document.body.style.backgroundColor = bgColor;
+        showAlert("Dark Mode Enabled", "primary");
       } else {
         setIsDisabled(false);
         setBtnColor("blue");
         setMode("light");
         document.body.style.backgroundColor = "white";
+        showAlert("Light Mode Enabled", "primary");
       }
     } else {
       setMode(newMode);
@@ -55,7 +70,7 @@ function App() {
 
   return (
     <>
-      {/* <Router> */}
+      <Router>
         <Navbar
           title="Text Utils"
           aboutText="About"
@@ -64,24 +79,22 @@ function App() {
           toggleBgColor={setBgColor}
           isDisabled={isDisabled}
         />
-        <Alert alert="Hello there" />
-        <div className="container my-3">
-          {/* <Routes>
-            <Route exact path="/about" element={<About />}></Route>
+        <Alert alert={alert} />
+          <Routes>
+            <Route exact path="/about" element={<About mode={mode}/>}></Route>
             <Route
               exact
               path="/"
-              element={ */}
+              element={
                 <TextForm
                   mode={mode}
                   heading="Enter the text to analyze below"
                   btnColor={btnColor}
                 />
-              {/* }
+             }
             ></Route>
-          </Routes> */}
-        </div>
-      {/* </Router> */}
+          </Routes>
+      </Router>
     </>
   );
 }
